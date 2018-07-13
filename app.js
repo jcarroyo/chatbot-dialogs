@@ -1,37 +1,60 @@
-var restify = require('restify');
-var builder = require('botbuilder');
+var restify = require('restify')
+var builder = require('botbuilder')
+var LUISSDK = require('./luis_sdk')
+var config = require('./config.json')
 
-// Setup Restify Server
-var server = restify.createServer();
+//App configuration
+
+//Initialize LUIS
+var LUISclient = LUISSDK({
+  appId: config.AzureServices.LUIS.appId,
+  appKey: config.AzureServices.LUIS.key,
+  verbose: true
+})
+
+//***Setup Restify Server***
+var server = restify.createServer()
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
+   console.log('%s listening to %s', server.name, server.url) 
+})
 
 // Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: process.env.MicrosoftAppId,
     appPassword: process.env.MicrosoftAppPassword
-});
+})
 
 // Listen for messages from users 
-server.post('/api/messages', connector.listen());
+server.post('/api/messages', connector.listen())
 
-// Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
+//***App Logic***
 var bot = new builder.UniversalBot(connector, [
 	function(session){
-		session.send("Bienvenido a nuestro chatbot de Calidda!!!");
-		session.beginDialog('requestDNI')
+		session.send("Bienvenido a nuestro chatbot de Calidda!!!")
+		session.beginDialog("rootMenu")
 	},	
 	function(session){
-		session.endConversation("Adiossss amigo!")
+		session.endConversation("Adiossss!")
 	}
-]);
+])
 
-bot.dialog('requestDNI', [
+require('./intents')(bot)
+
+bot.dialog('rootMenu', [
 	function(session){
-		builder.Prompts.text(session, '¿Cuál es tu DNI?')
+		builder.Prompts.text(session, "¿Qué puedo hacer por ti?")
 	},
 	function(session, results){
-		session.endDialog(`Hola! tu dni es ${results.response}!`)
+		var userInput = results.response
+		LUISclient.predict(userInput, {
+			onSuccess: function (response) {
+				var intent = response.topScoringIntent.intent
+				session.beginDialog(intent)
+			},
+			onFailure: function(err){
+				console.log(err)
+				session.send("oucrrio un error")
+			}
+		})
 	}
 ])

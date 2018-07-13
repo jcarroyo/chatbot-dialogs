@@ -1,0 +1,10 @@
+{
+	"AzureServices": {
+		"LUIS": {
+			"appId": "d002a5e0-75b5-45e8-b2ee-f99ec2324a1d",
+			"appName": "LUIS_Chatbot_Demo_C",
+			"key": "a534a34dabb346d5af367f1bfb5f4d37",
+			"endPoint": "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/d002a5e0-75b5-45e8-b2ee-f99ec2324a1d?subscription-key=ebb495ba51d84fe9956d982e52197ac2&verbose=true&timezoneOffset=0&q="
+		}
+	}
+}
