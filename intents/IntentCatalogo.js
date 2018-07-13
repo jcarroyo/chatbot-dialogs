@@ -1,6 +1,5 @@
 module.exports = function(bot){
 	var builder = require('botbuilder')
-	//var servicioCatalogo = require.main.require('./services/ServiceCatalogo.js')
 	var servicioCatalogo = require('../services/ServiceCatalogo.js')
 	function getCardsAttachmentsCatalogo(session){
 		var productos = servicioCatalogo.getCatalogo()
@@ -25,7 +24,7 @@ module.exports = function(bot){
 			var reply = new builder.Message(session)
 				.attachmentLayout(builder.AttachmentLayout.carousel)
 				.attachments(cards)
-			session.send(reply)
+			session.endDialog(reply)
 		}
 	])	
 }
