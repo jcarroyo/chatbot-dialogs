@@ -23,7 +23,7 @@ var bot = new builder.UniversalBot(connector, [
 		session.beginDialog('requestDNI')
 	},	
 	function(session){
-		session.endConversation("Adiossss!")
+		session.endConversation("Adiossss amigo!")
 	}
 ]);
 
