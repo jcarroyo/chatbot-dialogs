@@ -1,8 +1,8 @@
 module.exports = function(bot){
 	var builder = require('botbuilder')
-	var servicioCatalogo = require.main.require('./services/ServiceCatalogo.js')
+	//var servicioCatalogo = require.main.require('./services/ServiceCatalogo.js')
 	function getCardsAttachmentsCatalogo(session){
-		var productos = servicioCatalogo.getCatalogo()
+		/*var productos = servicioCatalogo.getCatalogo()
 		var cards = []
 		productos.forEach(function(producto){
 			var card = new builder.HeroCard(session)
@@ -14,7 +14,8 @@ module.exports = function(bot){
 				])
 			cards.push(card)
 		})
-		return cards
+		return cards*/
+		return 1
 	}
 
 	bot.dialog('Catalogo', [
