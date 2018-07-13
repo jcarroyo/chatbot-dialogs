@@ -15,35 +15,35 @@ module.exports = function(bot){
 		},
 		//NOMBRES
 		function(session, results){
-			var numeroDocumento = results.response.entity
+			var numeroDocumento = results.response
 			
 			session.userData.numeroDocumento = numeroDocumento
 			builder.Prompts.text(session, "Sus nombres completos")
 		},
 		//APELLIDOS
 		function(session, results){
-			var nombres = results.response.entity
+			var nombres = results.response
 			
 			session.userData.nombres = nombres
 			builder.Prompts.text(session, "Sus apellidos completos")
 		},
 		//CORREO
 		function(session, results){
-			var apellidos = results.response.entity
+			var apellidos = results.response
 			
 			session.userData.apellidos = apellidos
 			builder.Prompts.text(session, "Su correo")
 		},
 		//DIRECCION
 		function(session, results){
-			var correo = results.response.entity
+			var correo = results.response
 
 			session.userData.correo = correo
 			builder.Prompts.text(session, "Dirección completa (Departamento-Provincia-Distrito-Dirección")
 		},
 		//Confirmación de la orden
 		function(session, results){
-			var direccion = results.response.entity
+			var direccion = results.response
 
 			session.userData.direccion = direccion
 			var msg = new builder.Message()
@@ -52,7 +52,14 @@ module.exports = function(bot){
                      new builder.HeroCard(session)
                      .title("Orden del pedido")
                      .subtitle("Detalle")
-                     .text(`Tipo documento: ${session.userData.tipoDocumento}`)
+                     .text(
+                     	`Tipo de documento: ${session.userData.tipoDocumento}
+                     	 # documento: ${session.userData.numeroDocumento}
+                     	 Nombres: ${session.userData.nombres}
+                     	 Apellidos: ${session.userData.apellidos}
+                     	 Correo: ${session.userData.correo}
+                     	 Dirección: ${session.userData.direccion}
+                     `)
              ])
 			bot.send(msg)
 			builder.Prompts.confirm(session, "¿Es correcta la orden?")
