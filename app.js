@@ -38,6 +38,7 @@ var bot = new builder.UniversalBot(connector, [
 	}
 ])
 
+//Dialogs & Intents
 require('./intents')(bot)
 
 bot.dialog('rootMenu', [
