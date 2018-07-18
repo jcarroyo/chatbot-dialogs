@@ -30,12 +30,15 @@ server.post('/api/messages', connector.listen())
 //***App Logic***
 var bot = new builder.UniversalBot(connector, [
 	function(session){
-		session.send("Bienvenido a nuestro chatbot de Calidda!!!")
-		session.beginDialog("rootMenu")
-	},	
+		session.sendTyping()
+		setTimeout(function(){
+			session.send("Bienvenido a nuestro chatbot de Calidda!!!")		
+			session.beginDialog("rootMenu")
+		}, 2000)		
+	}/*,	
 	function(session){
 		session.endConversation("Adiossss!")
-	}
+	}*/
 ])
 
 //Dialogs & Intents
@@ -43,11 +46,24 @@ require('./intents')(bot)
 
 bot.dialog('rootMenu', [
 	function(session){
-		builder.Prompts.text(session, "¿Qué puedo hacer por ti?")
+		var message = "Vamos a empezar...¿cómo puedo ayudarte?"
+		var choices = ["Conoce tu facturación", "Solicita un servicio", "Consultas", "Reclamos"]
+		var options = {listStyle: builder.ListStyle.button}
+		builder.Prompts.choice(session, message, choices, options)
 	},
 	function(session, results){
-		var userInput = results.response
-		LUISclient.predict(userInput, {
+		var userInput = results.response.index
+		//console.log(results.response) -> { index: 0, entity: 'Conoce tu facturación', score: 1 }
+		switch(userInput){
+			case 0: {
+				session.beginDialog('Recibo');
+				break;
+			}
+			default:{
+				session.send("???")
+			}
+		}
+		/*LUISclient.predict(userInput, {
 			onSuccess: function (response) {
 				var intent = response.topScoringIntent.intent
 				session.beginDialog(intent)
@@ -56,6 +72,6 @@ bot.dialog('rootMenu', [
 				console.log(err)
 				session.send("oucrrio un error")
 			}
-		})
+		})*/
 	}
 ])
