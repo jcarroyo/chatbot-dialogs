@@ -1,7 +1,11 @@
 module.exports = function(bot){
-	bot.dialog('Pregunta', [
+	var builder = require('botbuilder')
+	bot.dialog('Preguntas', [
 		function(session){
-			session.endDialog("cargando las preguntas...")
+			builder.Prompts.text(session, "¿Sobre que tema deseas información?")			
+		},
+		function(session, results){
+			session.endDialog("Deseas saber sobre " + results.response)
 		}
 	])	
 }
