@@ -33,13 +33,16 @@ var bot = new builder.UniversalBot(connector, [
 		session.sendTyping()
 		setTimeout(function(){
 			session.send("Bienvenido a nuestro chatbot de Calidda!!!")		
-			session.beginDialog("rootMenu")
+			session.beginDialog("Preguntas")
 		}, 2000)		
 	}
 ])
 
+bot.set('storage', new builder.MemoryBotStorage()); 
+
 //Dialogs & Intents
 require('./intents')(bot)
+
 
 bot.dialog('rootMenu', [
 	function(session){
@@ -66,6 +69,7 @@ bot.dialog('rootMenu', [
 			}
 			case 3: {
 				session.beginDialog('Preguntas')
+				
 				break
 			}
 			case 4:{
