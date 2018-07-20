@@ -32,7 +32,7 @@ var bot = new builder.UniversalBot(connector, [
 	function(session){
 		session.sendTyping()
 		setTimeout(function(){
-			session.send("Bienvenido a nuestro chatbot de Calidda!!!")		
+			session.send("Bienvenido a nuestro chatbot de xyz!!!")		
 			session.beginDialog("rootMenu")
 		}, 2000);	
 	}

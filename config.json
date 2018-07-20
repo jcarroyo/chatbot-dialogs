@@ -1,15 +1,15 @@
 {
 	"AzureServices": {
 		"LUIS": {
-			"appId": "d002a5e0-75b5-45e8-b2ee-f99ec2324a1d",
-			"appName": "LUIS_Chatbot_Demo_C",
-			"key": "a534a34dabb346d5af367f1bfb5f4d37",
-			"endPoint": "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/d002a5e0-75b5-45e8-b2ee-f99ec2324a1d?subscription-key=ebb495ba51d84fe9956d982e52197ac2&verbose=true&timezoneOffset=0&q="
+			"appId": "",
+			"appName": "",
+			"key": "",
+			"endPoint": ""
 		},
 		"QNA": {
-			"knowledgeBaseId": "9bfa3869-0cab-4b92-b9c8-911b071afc6d",
-			"authKey": "8892c297-23f6-4538-b17f-f98629d80d72",
-			"endpointHostName": "https://qnachatbotdemoc.azurewebsites.net/qnamaker"
+			"knowledgeBaseId": "",
+			"authKey": "",
+			"endpointHostName": ""
 		}
 	}
 }
