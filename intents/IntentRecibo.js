@@ -11,7 +11,7 @@ module.exports = function(bot){
 			var reply = new builder.Message()
 				.setText(session, "Recibo de julio 2018")
 				.addAttachment({ fallbackText: "Gracias!!!", contentType: 'image/jpeg', contentUrl: "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2729462.jpg" })
-			session.send(reply)			
+			session.endDialog(reply)			
 		}
 	])	
 }

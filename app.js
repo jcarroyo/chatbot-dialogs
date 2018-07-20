@@ -33,8 +33,8 @@ var bot = new builder.UniversalBot(connector, [
 		session.sendTyping()
 		setTimeout(function(){
 			session.send("Bienvenido a nuestro chatbot de Calidda!!!")		
-			session.beginDialog("Preguntas")
-		}, 2000)		
+			session.beginDialog("rootMenu")
+		}, 2000);	
 	}
 ])
 
@@ -48,7 +48,7 @@ bot.dialog('rootMenu', [
 	function(session){
 		var message = "Vamos a empezar...¿cómo puedo ayudarte?"
 		var choices = ["Conoce tu facturación", "Solicitar instalación de servicio", "Solicitar un producto", "Consultas", "Reclamos"]
-		var options = {listStyle: builder.ListStyle.button}
+		var options = {listStyle: builder.ListStyle.button};
 		builder.Prompts.choice(session, message, choices, options)
 	},
 	function(session, results){
