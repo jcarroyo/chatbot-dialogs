@@ -56,7 +56,7 @@ bot.dialog('rootMenu', [
 		//console.log(results.response) -> { index: 0, entity: 'Conoce tu facturación', score: 1 }
 		switch(userInput){
 			case 0: {
-				session.beginDialog('Recibo')
+				session.beginDialog('Facturacion')
 				break
 			}
 			case 1: {
@@ -64,12 +64,11 @@ bot.dialog('rootMenu', [
 				break
 			}
 			case 2: {
-				session.beginDialog('Solicitar Producto')
+				session.beginDialog('Catalogo')
 				break
 			}
 			case 3: {
-				session.beginDialog('Preguntas')
-				
+				session.beginDialog('Preguntas')				
 				break
 			}
 			case 4:{
