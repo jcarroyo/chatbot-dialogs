@@ -34,21 +34,21 @@ var bot = new builder.UniversalBot(connector, [
 		setTimeout(function(){
 			session.send("Bienvenido a nuestro chatbot de Calidda!!!")		
 			session.beginDialog("rootMenu")
-		}, 2000)		
-	}/*,	
-	function(session){
-		session.endConversation("Adiossss!")
-	}*/
+		}, 2000);	
+	}
 ])
+
+bot.set('storage', new builder.MemoryBotStorage()); 
 
 //Dialogs & Intents
 require('./intents')(bot)
 
+
 bot.dialog('rootMenu', [
 	function(session){
 		var message = "Vamos a empezar...¿cómo puedo ayudarte?"
-		var choices = ["Conoce tu facturación", "Solicita un servicio", "Consultas", "Reclamos"]
-		var options = {listStyle: builder.ListStyle.button}
+		var choices = ["Conoce tu facturación", "Solicitar instalación de servicio", "Solicitar un producto", "Consultas", "Reclamos"]
+		var options = {listStyle: builder.ListStyle.button};
 		builder.Prompts.choice(session, message, choices, options)
 	},
 	function(session, results){
@@ -56,11 +56,28 @@ bot.dialog('rootMenu', [
 		//console.log(results.response) -> { index: 0, entity: 'Conoce tu facturación', score: 1 }
 		switch(userInput){
 			case 0: {
-				session.beginDialog('Recibo');
-				break;
+				session.beginDialog('Recibo')
+				break
+			}
+			case 1: {
+				session.beginDialog('Solicitar Servicio')
+				break
+			}
+			case 2: {
+				session.beginDialog('Solicitar Producto')
+				break
+			}
+			case 3: {
+				session.beginDialog('Preguntas')
+				
+				break
+			}
+			case 4:{
+				session.beginDialog('Reclamos')
+				break
 			}
 			default:{
-				session.send("???")
+				session.beginDialog("None")
 			}
 		}
 		/*LUISclient.predict(userInput, {
